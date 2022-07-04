@@ -1,52 +1,39 @@
-import React from "react";
-import Logo from "../../imgs/logo.png";
+import React, { useState } from "react";
 import "./Sidebar.css";
-import { SidebarData } from "../../Data/Data"
-import { UilSignOutAlt } from "@iconscout/react-unicons"
+import Logo from "../../imgs/logo.png";
+import { SidebarData } from "../../Data/Data";
+import { UilSignOutAlt } from "@iconscout/react-unicons";
 const Sidebar = () => {
-    return ( <
-        div className = "Sidebar" > { " " } { /*logo */ } <
-        div className = "logo" >
+  const [selected, setSelected] = useState(0);
 
-        <
-        img src = { Logo }
-        alt = "" / >
-
-        <
-        span >
-        Sh < span > o < /span>ps    <
-        /span> { " " }  { / * menu * / }  <
-        div className = "menu" > {
-            SidebarData.map((Icon, index) => {
-                return ( <
-                    div className = "menuItems" >
-
-
-                    <
-                    span > { Icon.heading } <
-                    /span>     <
-                    /div>
-
-                )
-            })
-        }
-
-        <
-        div className = "menuiItem" >
-        <
-        UilSignOutAlt / >
-        <
-        /div> 
-
-
-        <
-        /div>     <
-        /div>  <
-        /div>
-
-
-
-    );
+  return (
+    <div className="Sidebar">
+      {/* logo */}
+      <div className="logo">
+        <img src={Logo} alt="" />
+        <span>
+          Sh<span>o</span>ps
+        </span>
+      </div>
+      <div className="menu">
+        {SidebarData.map((item, index) => {
+          return (
+            <div
+              className={selected === index ? "menuItem active" : "menuItem"}
+              key={index}
+              onClick={()=>setSelected(index)}
+            >
+              <item.icon />
+              <span>{item.heading}</span>
+            </div>
+          )
+        })}
+        <div className="menuItem">
+          <UilSignOutAlt/>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Sidebar;
